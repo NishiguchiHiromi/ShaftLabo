@@ -1,9 +1,10 @@
+■Geth
 〇ここからダウンロード
 
-?https://geth.ethereum.org/downloads/?
+https://geth.ethereum.org/downloads/
 
 ↓上記が無理ならこちら?
-（chromeの「検証」でリンク先をとってきました。windows用。）?https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.8-2688dab4.exe
+（chromeの「検証」でリンク先をとってきました。windows用。）https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.8-2688dab4.exe
 
 
 
@@ -16,7 +17,7 @@
 ⇒Gethにチェックを入れ?⇒Next
 
 ⇒インストール先を選択?
-（私の場合："C:\tools\ethereum\Geth-1.8.7"）?
+（私の場合："C:\tools\ethereum\Geth-1.8.7"）
 
 ⇒パスの確認：コマンドプロンプトに"where geth"
 geth.exeの場所が表示されればOK
@@ -49,10 +50,55 @@ eth.accounts
 eth.getBlock(0)
 など
 
+〇ブロックからトランザクション確認
+eth.getTransactionFromBlock(809)
+
+〇ロック解除
+personal.unlockAccount(eth.accounts[0])
+
 〇マイニング開始
 miner.start(2)
 
 〇マイニング確認
 eth.mining
 
+〇マイニング停止
+miner.stop()
 
+〇残高確認
+web3.fromWei(eth.getBalance(eth.accounts[0]),"ether")
+
+〇送金
+eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[2], value: web3.toWei(5, "ether")})
+
+
+
+■Mist Wallet
+〇ここからダウンロード
+https://github.com/ethereum/mist/releth.getBlock(eases
+「Ethereum-Wallet-win64-0-10-0.zip」
+
+〇解凍
+exeファイルが、下記のようになるように配置
+C:\tools\ethereum\Ethereum-Wallet-win64-0-10-0\Ethereum Wallet.exe
+
+〇起動
+gethを起動した状態で、exeファイルを実行
+⇒画面右上にprivate-netと表示される
+⇒lauch appicationをクリック
+
+■ターミナルから実行
+〇コントラクトを定義
+var he = eth.contract(インターフェイス).at('アドレス')
+
+例：
+var he = eth.contract([ { "constant": false, "inputs": [ { "name": "_msg2", "type": "string" } ], "name": "setMsg2", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "counter", "outputs": [ { "name": "", "type": "uint8", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getMsg2", "outputs": [ { "name": "", "type": "string", "value": "shaft2" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "setCounter", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xc2012756e80e9dd91e62c5518c965188482412da" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "msg1", "outputs": [ { "name": "", "type": "string", "value": "shaftEthereum" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [ { "name": "_msg1", "type": "string", "index": 0, "typeShort": "string", "bits": "", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;msg1", "template": "elements_input_string", "value": "shaftEthereum" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" } ]).at('0x4d09bAbc416e386DC42013fB62D7798dc812F96E')
+
+he.adressなどでアクセスできる
+
+〇トランザクションを実行
+コントラクト変数名.関数名.sendTransaction(引数, {from: 呼び出し元アドレス, gas:ガスのリミット});
+例：
+he.setMsg2.sendTransaction("shaft3", {from:eth.accounts[0], gas:5000000});
+
+eth.getTransactionReceipt('')
