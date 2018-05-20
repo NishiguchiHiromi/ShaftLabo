@@ -1,0 +1,58 @@
+〇ここからダウンロード
+
+?https://geth.ethereum.org/downloads/?
+
+↓上記が無理ならこちら?
+（chromeの「検証」でリンク先をとってきました。windows用。）?https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.8-2688dab4.exe
+
+
+
+
+〇インストール
+⇒exeファイルを起動
+
+⇒"I Agree"
+
+⇒Gethにチェックを入れ?⇒Next
+
+⇒インストール先を選択?
+（私の場合："C:\tools\ethereum\Geth-1.8.7"）?
+
+⇒パスの確認：コマンドプロンプトに"where geth"
+geth.exeの場所が表示されればOK
+
+
+
+〇初期設定
+⇒C:\tools\ethereum\Geth-1.8.7\home\eth_private_netというフォルダを作成
+
+⇒genesis.jsonを作成しそこに入れる（このgithub repositoryに例があるのでそれをそのまま使ってもOK）
+	↑初期化時の設定ファイル
+
+⇒各種データを保存するためのディレクトリと設定ファイルを指定して初期化
+コマンドプロンプトに下記を入力(うまくいけば"Successfully wrote genesis state"と表示される)
+geth --datadir C:\tools\ethereum\Geth-1.8.7\home\eth_private_net init C:\tools\ethereum\Geth-1.8.7\home\eth_private_net\genesis.json
+
+⇒gethの起動
+コマンドプロンプトに下記を入力(長いですが一つのコマンドです。一瞬でWelcome to the Geth JavaScript consoleと出なければどこか間違っています。。。)
+geth --networkid "10" --nodiscover --datadir "C:\tools\ethereum\Geth-1.8.7\home\eth_private_net" --rpc --rpcaddr "localhost" --rpcport "8545" --rpccorsdomain "*" --rpcapi "eth,net,web3,personal" --targetgaslimit "20000000" console 2>> C:\tools\ethereum\Geth-1.8.7\home\eth_private_net\geth_err.log
+
+〇アカウントの作成
+personal.newAccount("パスワード")
+これを4回。本番環境用のアカウントを作る場合はちゃんとしたパスワードを！！
+
+〇アカウントの確認
+eth.accounts
+配列形式なので[0]などで各アカウントを表示
+
+〇ブロックの確認
+eth.getBlock(0)
+など
+
+〇マイニング開始
+miner.start(2)
+
+〇マイニング確認
+eth.mining
+
+
