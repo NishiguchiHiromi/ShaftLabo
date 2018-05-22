@@ -102,3 +102,28 @@ he.adressなどでアクセスできる
 he.setMsg2.sendTransaction("shaft3", {from:eth.accounts[0], gas:5000000});
 
 eth.getTransactionReceipt('')
+
+
+
+
+
+
+
+
+
+var he = eth.contract([ { "constant": false, "inputs": [], "name": "checkGoalReached", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "ended", "outputs": [ { "name": "", "type": "bool", "value": false } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "numInvestors", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalAmount", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "status", "outputs": [ { "name": "", "type": "string", "value": "Funding" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "goalAmount", "outputs": [ { "name": "", "type": "uint256", "value": "1e+30" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "deadline", "outputs": [ { "name": "", "type": "uint256", "value": "1526823731" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "witdraw", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "kill", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "investors", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xa774e58aaa6959d781d90fec44b1db13c533b648" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "fund", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [ { "name": "_duration", "type": "uint256", "index": 0, "typeShort": "uint", "bits": "256", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;duration", "template": "elements_input_uint", "value": "10" }, { "name": "_goalAmount", "type": "uint256", "index": 1, "typeShort": "uint", "bits": "256", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;goal Amount", "template": "elements_input_uint", "value": "1000000000000000000000000000000" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "", "type": "string" } ], "name": "MessageLog", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "", "type": "uint256" } ], "name": "BalanceLog", "type": "event" } ]).at('0x08d520B1925e94175F6e761E1601e3558662bA67')
+
+personal.unlockAccount(eth.accounts[0])
+
+he.fund.sendTransaction({from:eth.accounts[2], gas:5000000, value: web3.toWei(7,"ether")})
+
+web3.fromWei(he.totalAmount(),"ether")
+
+he.checkGoalReached.sendTransaction({from:eth.accounts[1], gas:5000000})
+
+he.witdraw({from:eth.accounts[2], gas:5000000})
+
+
+
+
+
